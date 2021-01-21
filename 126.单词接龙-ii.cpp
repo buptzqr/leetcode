@@ -5,12 +5,12 @@
  */
 
 // @lc code=start
-// #include<iostream>
-// #include<vector>
-// #include<unordered_map>
-// #include<queue>
-// #include<limits.h>
-// using namespace std;
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+#include<queue>
+#include<limits.h>
+using namespace std;
 class Solution {
 public:
     unordered_map<string, int> str2id;//key是string，val是该string的id

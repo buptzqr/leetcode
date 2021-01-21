@@ -26,7 +26,7 @@
 // };
 class Solution {
 public:
-//同样是自底向上的归并排序
+//同样是自底向上的归并排序，因为不是数组，所以merge后要更新list
     ListNode * Merge(ListNode *l,ListNode *r){
         ListNode * dummy_head = new ListNode(-1);
         ListNode * cur = dummy_head;

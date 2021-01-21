@@ -12,6 +12,7 @@
 // #include<functional>
 // #include <algorithm>
 // using namespace std;
+//超过k个元素怎么办？那就先pop再push呗，priority_queue的用法和stack一致，只有top没有back和front
 class Solution {
 public:
     // vector<int> topKFrequent(vector<int>& nums, int k) {

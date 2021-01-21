@@ -5,13 +5,13 @@
  */
 
 // @lc code=start
-// #include<iostream>
-// #include<queue>
-// #include<map>
-// #include<vector>
-// #include<algorithm>
-// #include<unordered_map>
-// using namespace std;
+#include<iostream>
+#include<queue>
+#include<map>
+#include<vector>
+#include<algorithm>
+#include<unordered_map>
+using namespace std;
 /*class Solution {
 public:
 // 波神这一波操作就是提前建表，因为这个表是一个沿对角线对称的表，所以就省了很多计算量
@@ -95,7 +95,8 @@ private:
 };
 */
 
-//和我们思路最不同的地方就在于他每个word连接的是虚拟节点，比如hot连接的就是h*t,*ot,ho*,这样搜索的时间复杂度就从o(n^2)降到了o(n*c)，广度优先搜索的时间复杂度就是节点的数目
+//和我们思路最不同的地方就在于他每个word连接的是虚拟节点，比如hot连接的就是h*t,*ot,ho*,
+// 这样搜索的时间复杂度就从o(n^2)降到了o(n*c)，广度优先搜索的时间复杂度就是节点的数目
 class Solution {
 // public:
 //     unordered_map<string, int> wordId;
@@ -153,6 +154,7 @@ class Solution {
 //         return 0;
 //     }
 public:
+//这个题目首先有一点就是string通过一个map映射为int，然后就可以构建邻接矩阵或者邻接表了
 //我自己来一个双向广搜,所谓双向广搜就是一方面从头开始BFS，一方面从尾开始BFS，什么时候这两方面都访问了同一个元素，说明找到了一条通路
 //这里还存在一个优化，就是每次我们应该直接广度优先遍历一层，而不是说每次遍历一层的一个元素
     unordered_map<string, int> str2id;//key是string，val是该string的id

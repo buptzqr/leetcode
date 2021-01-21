@@ -17,7 +17,7 @@
 class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
-        //层序遍历，每一层的最右面的元素
+        //层序遍历，每一层的最右面的元素，vec_queue只存储一层的节点，tmp用来存储vec_queue存储节点的下一层节点
         if(!root)
             return vector<int>();
         vector<TreeNode*> vec_queue;

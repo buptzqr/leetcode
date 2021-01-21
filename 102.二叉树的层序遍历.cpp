@@ -19,7 +19,7 @@ class Solution
 public:
     vector<vector<int>> levelOrder(TreeNode *root)
     {
-        // 这个题得思路就是既保存节点又保存节点得层数
+        // 这个题得思路就是既保存节点又保存节点得层数,方法就是queue做成pair<TreeNode *, int>其中int存储层数
         queue<pair<TreeNode *, int>> q;
         vector<vector<int>> res;
         while (!root)

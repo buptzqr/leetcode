@@ -21,8 +21,23 @@ public:
             return memo[idx][amount];
         for(int j=coins[idx];j<=amount;j++){
             int n  = j/coins[idx];//凑j最多可以使用多少个coins[idx]
-            
+            bool flag = true;
+            for(int i=0;i<=n;i++){
+                int nums = findMinCoins(coins,idx-1,j-i*coins[idx]);
+                if(nums!=-1){
+                    if(flag){
+                        memo[idx][j] = i+ nums;
+                        flag=false;
+                    }
+                    else
+                        memo[idx][j] = min(memo[idx][j],i+nums);
+                }
+                else
+                    continue;   
+                
+            }   
         }
+        return 
     }
     //memo[idx][amount]表示从[0,idx]凑成amount所需要的最少硬币数，-1代表无法凑成
     int coinChange(vector<int>& coins, int amount) {

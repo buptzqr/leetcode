@@ -43,17 +43,41 @@ public:
     //     return 0;
     // }
     // 动态规划，每一个数的最少平方数，等于与他相差平方数的其他数的最少平方数的最小值+1
+    // int numSquares(int n) {
+    //     vector<int> rec(n+1,-1);
+    //     rec[0] = 0;
+    //     rec[1] = 1;
+    //     for(int i=2;i<=n;i++){
+    //         int min_path = INT_MAX;
+    //         for(int j=1;i-j*j>=0;j++)
+    //             min_path = min(rec[i-j*j],min_path);
+    //         rec[i] = min_path+1;
+    //     }
+    //     return rec[n];
+    // }
+    //bfs
     int numSquares(int n) {
-        vector<int> rec(n+1,-1);
-        rec[0] = 0;
-        rec[1] = 1;
-        for(int i=2;i<=n;i++){
-            int min_path = INT_MAX;
-            for(int j=1;i-j*j>=0;j++)
-                min_path = min(rec[i-j*j],min_path);
-            rec[i] = min_path+1;
+        vector<bool> visited(n+1,false);
+        vector<int> q;
+        q.push_back(n);
+        visited[n] = true;
+        int ret = 0;
+        while(!q.empty()){
+            ret++;
+            vector<int> tmp;
+            for(auto e:q){
+                for(int i=1;e-i*i>=0;i++){
+                    if(!visited[e-i*i]){
+                        if(e-i*i==0)
+                            return ret;
+                        tmp.push_back(e-i*i);
+                        visited[e-i*i]=true;
+                    }
+                }
+            }
+            q=tmp;
         }
-        return rec[n];
+        return 0;
     }
 
 };

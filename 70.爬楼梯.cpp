@@ -28,15 +28,35 @@ public:
         
     // }
     //动态规划解法
+    // int climbStairs(int n) {
+    //     vector<int> memo(n+1,-1);
+    //     memo[0] = 1;
+    //     memo[1] = 1;
+    //     for (int i = 2;i<=n;i++){
+    //         memo[i] = memo[i - 1] + memo[i - 2];
+    //     }
+    //     return memo[n];
+    // }
+    vector<int> memo;//memo[idx]从第0级到第idx级爬楼方式
+    int findPath(int idx){
+        if(idx<0)
+            return 0;
+        if(idx==0)
+            return 1;
+        if(memo[idx]!=-1)
+            return memo[idx];
+        memo[idx] = findPath(idx-1)+findPath(idx-2);
+        return memo[idx];
+    }
     int climbStairs(int n) {
-        vector<int> memo(n+1,-1);
-        memo[0] = 1;
-        memo[1] = 1;
-        for (int i = 2;i<=n;i++){
-            memo[i] = memo[i - 1] + memo[i - 2];
-        }
-        return memo[n];
+        //这个问题就是动规的经典问题了
+        memo = vector<int>(n + 1, -1);
+        return findPath(n);
     }
 };
+// int main(){
+//     int res=Solution().climbStairs(2);
+//     return 0;
+// }
 // @lc code=end
 

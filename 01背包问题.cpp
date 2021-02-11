@@ -4,6 +4,8 @@
 using namespace std;
 class Solution{
     public:
+    // F(i,c)//考虑将i个物品放入容量为c的背包所能取得的最大价值
+    // F(i,c) = max(v[i]+F(i-1,c-w[i]),F(i-1,c))
     //01背包问题，记忆化搜索
     // vector<vector<int>> memo;
     // //尝试从[0,idx]的物品中找容量小于cap的最大价值的物品
@@ -25,7 +27,7 @@ class Solution{
     //动态规划
     int packetProblem(vector<int> w, vector<int> v, int cap){
         vector<int> memo(cap+1,0);
-        //memo[i]代表考虑[0,j]号物品，找这些物品组合（满足容量小于i），的最大价值(j)在下面代码中体现
+        //memo[i]代表考虑[0,j]号物品，找这些物品组合（满足容量小于i），的最大价值 (j在下面代码中体现)
         for(int i=0;i<=cap;i++)
             memo[i] = w[0]<=i?v[0]:0;
         for(int i=1;i<w.size();i++)

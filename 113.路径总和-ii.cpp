@@ -42,6 +42,7 @@ public:
         // }
     // }
     //这个时间复杂度应该是o(n)
+    //回溯
     public:
     vector<vector<int>> ret;
     vector<int> path;

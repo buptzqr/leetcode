@@ -5,9 +5,9 @@
  */
 
 // @lc code=start
-// #include<iostream>
-// #include<vector>
-// #include<algorithm>
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
 class Solution
 {
@@ -30,7 +30,9 @@ public:
         }
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        //这个题还是去重比较关键,同一层不可以重复，不同层可以重复,如果nums[i]==nums[i-1]&&visited[i-1]=false,说明同层选取，如果nums[i]==nums[i-1]&&visited[i-1]=true说明异层选取，可以选取
+        //这个题还是去重比较关键,同一层不可以重复，不同层可以重复,
+        // 如果nums[i]==nums[i-1]&&visited[i-1]=false,说明同层选取，
+        // 如果nums[i]==nums[i-1]&&visited[i-1]=true说明异层选取，可以选取
         vector<int> cur;
         vector<vector<int>> res;
         sort(nums.begin(), nums.end());

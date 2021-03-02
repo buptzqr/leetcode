@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+#include<vector>
+using namespace std;
 class Solution {
 public:
     //visited代表下一次需要在那些数中寻找组合数，k代表需要寻找的组合数的数目
@@ -22,9 +24,9 @@ public:
             int val = *itr;
             itr=visited.erase(itr);
             k--;
-            vector<vector<int>> res_before = combine(k, visited);
-            if(res_before.size())
-                for(auto e:res_before){
+            vector<vector<int>> res_after = combine(k, visited);
+            if(res_after.size())
+                for(auto e:res_after){
                     e.push_back(val);
                     res.push_back(e);
                 }
@@ -50,7 +52,7 @@ public:
             return;
         }
         //循环结束条件做了剪枝
-        for(int i=start;i<=n-(k-c.size())+1;i++){
+        for(int i=start;i<=n-(k-rec.size())+1;i++){
             vec.push_back(i);
             combine(n,k,i+1,rec);
             rec.pop_back();

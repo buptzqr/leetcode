@@ -15,6 +15,7 @@ public:
     const string digitMap[8] = {
         "abc", "def", "ghi", "jkl",
         "mno", "pqrs", "tuv", "wxyz"};
+    // 递归
     vector<string> letterCombinations(string digits)
     {
         vector<string> res;

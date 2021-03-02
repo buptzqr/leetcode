@@ -5,6 +5,8 @@
  */
 
 // @lc code=start
+#include<vector>
+using namespace std;
 class Solution {
     // private:
     //     vector<vector<int>> res;
@@ -30,26 +32,44 @@ class Solution {
     // 如果从后向前想的话就是我当前节点可以加入或者不加入后续节点构成的全部子集中去
     public:
     //这里cur_idx是构成子集开始的元素，从该元素一直到nums最后一个元素
-        vector<vector<int>> solution(vector<int> &nums,int cur_idx){
-            vector<vector<int>> res;
-            if(cur_idx==nums.size())
-                return res;
-            vector<vector<int>> after_res = solution(nums, cur_idx + 1);
-            if(after_res.size())
-                for(auto e:after_res){
-                    res.push_back(e);
-                    e.push_back(nums[cur_idx]);
-                    res.push_back(e);
-                }
-            else{
-                res.push_back(vector<int>());
-                res.push_back(vector<int>(1,nums[cur_idx]));
-            }
-            return res;
+        // vector<vector<int>> solution(vector<int> &nums,int cur_idx){
+        //     vector<vector<int>> res;
+        //     if(cur_idx==nums.size())
+        //         return res;
+        //     vector<vector<int>> after_res = solution(nums, cur_idx + 1);
+        //     if(after_res.size())
+        //         for(auto e:after_res){
+        //             res.push_back(e);
+        //             e.push_back(nums[cur_idx]);
+        //             res.push_back(e);
+        //         }
+        //     else{
+        //         res.push_back(vector<int>());
+        //         res.push_back(vector<int>(1,nums[cur_idx]));
+        //     }
+        //     return res;
+        // }
+        // vector<vector<int>> subsets(vector<int> &nums){
+        //     return solution(nums, 0);
+        // }
+        void dfs(vector<vector<int>>& res,vector<int>& path,vector<int> &nums,int idx){
+            if(idx==nums.size()){
+                res.push_back(path);
+                return;
+            }  
+            // 包括当前元素
+            path.push_back(nums[idx]);
+            dfs(res,path,nums,idx+1);
+            path.pop_back();
+            dfs(res,path,nums,idx+1);
         }
         vector<vector<int>> subsets(vector<int> &nums){
-            return solution(nums, 0);
+            vector<vector<int>> res;
+            vector<int> path;
+            dfs(res,path,nums,0);
+            return res;
         }
+
 };
 // @lc code=end
 

@@ -14,7 +14,7 @@ public:
     vector<int> dailyTemperatures(vector<int>& T) {
         // 通常是一维数组，
         // 要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置
-        // 此题维护一个从栈顶到栈底的单调递减的栈就好
+        // 此题维护一个从栈底到栈顶的单调递减的栈就好
         // 和之前的那个单调队列可以类比
         stack<int> rec;
         vector<int> res(T.size(),0);

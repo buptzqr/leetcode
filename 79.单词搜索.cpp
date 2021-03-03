@@ -5,9 +5,9 @@
  */
 
 // @lc code=start
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+#include<iostream>
+#include<vector>
+using namespace std;
 // class Solution
 // {
 // private:
@@ -61,7 +61,7 @@
 class Solution {
 
 private:
-    int d[4][2] = {{-1, 0}, {0,1}, {1, 0}, {0, -1}};
+    int d[4][2] = {{-1, 0}, {0,1}, {1, 0}, {0, -1}};//这就是在二维平面搜索的常用技巧
     int m, n;
     vector<vector<bool>> visited;
 

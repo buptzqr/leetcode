@@ -13,72 +13,88 @@ class Solution
 {
 
 public:
-    //这个函数就是从nums里面取长度为n的子集
-    void solution(string nums,int idx,int n,string& before_str,vector<string>& res){
-        if(before_str.size()==n){
-            res.push_back(before_str);
+    void dfs(vector<int>& res,vector<int>& path,int target,vector<bool>& visited,int idx){
+        if(target==0){
+            int ret = 0;
+            for(auto e:path)
+                ret+=pow(2,e);
+            res.push_back(ret);
             return;
         }
-        if(n-before_str.size()> nums.size()-idx+1)
-            return;
-        solution(nums, idx + 1, n,before_str, res);
-        before_str.push_back(nums[idx]);
-        solution(nums, idx + 1, n,before_str, res);
-        before_str.pop_back();
+        for(int i=idx;i<visited.size();i++){
+            if(!visited[i]){
+                visited[i] = true;
+                path.push_back(i);
+                dfs(res,path,target-1,visited,i+1);
+                visited[i] = false;
+                path.pop_back();
+            }
+        }
     }
     vector<string> readBinaryWatch(int num) {
-        string high = "0123";
-        string low = "012345";
-        vector<string> high_vec;
-        vector<string> low_vec;
+        // 就是一个组合问题
         vector<string> res;
-        string high_res;
-        string low_res;
-        for (int i = 0; i <= 4&&i<=num; i++)
-        {
-            high_vec.clear();
-            low_vec.clear();
-            high_res.clear();
-            low_res.clear();
-            solution(high, 0, i, high_res, high_vec);
-            solution(low, 0, num-i, low_res, low_vec);
-            if(high_vec.size()&&low_vec.size()){
-
-                vector<int> high_ ;
-                vector<int> low_;
-                for (auto str : high_vec){
-                    int high_num = 0;
-                    for (auto c : str)
-                        high_num += pow(2, c - '0');
-                    if(high_num>=0&&high_num<=11)
-                        high_.push_back(high_num);
-                }
-                for (auto str : low_vec){
-                    int low_num = 0;
-                    for (auto c : str)
-                        low_num += pow(2, c - '0');
-                    if(low_num>=0&&low_num<=59)
-                        low_.push_back(low_num);
-                }
-                for(auto h:high_){
-                    for(auto l:low_){
-                        char buff[3];
-                        snprintf(buff, sizeof(buff), "%02d", l);
-                        res.push_back(to_string(h) + ":" + string(buff));
-
+        for(int i = 0; i < 4&&i<=num;i++){
+            if(num-i>=6)
+                continue;                  
+            vector<int> h;
+            vector<int> h_path;
+            vector<int> m;      
+            vector<int> m_path;
+            vector<bool> h_visited(4,false);
+            vector<bool> m_visited(6,false);
+            dfs(h,h_path,i,h_visited,0);
+            dfs(m,m_path,num-i,m_visited,0);
+            for(auto hour:h){
+                for(auto minute:m){
+                    if(hour<=11&&minute<=59){
+                        string r;
+                        r+=to_string(hour);
+                        r+=':';
+                        if(minute<=9){
+                            r+='0';
+                        }
+                        r+=to_string(minute);
+                        res.push_back(r);
                     }
                 }
             }
         }
         return res;
+
     }
+    // 一种特别简单的方法，直接遍历
+    /*
+      vector<string> readBinaryWatch(int num) {
+        vector<string> res;
+        //直接遍历  0:00 -> 12:00   每个时间有多少1
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 60; j++) {
+                if (count1(i) + count1(j) == num) {
+                    res.push_back(to_string(i)+":"+
+                                  (j < 10 ? "0"+to_string(j) : to_string(j)));
+                }
+            }
+        }
+        return res;
+    }
+    //计算二进制中1的个数
+    int count1(int n) {
+        int res = 0;
+        while (n != 0) {
+            n = n & (n - 1);
+            res++;
+        }
+        return res;
+    }
+    */
 };
-int main(){
-    vector<string> res = Solution().readBinaryWatch(1);
-    for(auto e:res)
-        cout << e << endl;
-    return 0;
-}
+// int main(){
+//     vector<string> res = Solution().readBinaryWatch(6);
+//     for(auto e:res)
+//         cout << e << endl;
+//     return 0;
+// }
 
 // @lc code=end
 

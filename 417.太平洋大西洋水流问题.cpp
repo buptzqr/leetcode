@@ -6,9 +6,9 @@
 
 // @lc code=start
 //从四个边界逆流搜索，分别记录可以到达太平洋和印度洋的节点，然后求交集,从边界节点出发，该节点的周围只要是元素>=该节点的，那么就可以洪泛到
-// #include<iostream>
-// #include<vector>
-// using namespace std;
+#include<iostream>
+#include<vector>
+using namespace std;
 class Solution
 {
 private:

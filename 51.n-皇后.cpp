@@ -22,16 +22,15 @@ public:
     {
         return row >= 0 && col >= 0 && row < n && col < n;
     }
-    //放置第row到n行皇后是否成功
+    //放置第row行皇后是否成功
     void putQueen(int row,vector<int>& col_pos,vector<vector<string>>& res){
+        if(row == n){
+            res.push_back(pos2str(col_pos));
+            return;
+        }
         for (int i = 0; i < n;i++){
             if(!col_rec[i]&&!diag1_rec[row+i]&&!diag2_rec[row-i+n-1]){
                 col_pos.push_back(i);
-                if(col_pos.size()==n){
-                    res.push_back(pos2str(col_pos));
-                    col_pos.pop_back();
-                    return ;
-                }
                 col_rec[i] = true;
                 diag1_rec[row + i] = true;
                 diag2_rec[row - i + n - 1] = true;
@@ -55,6 +54,7 @@ public:
     vector<vector<string>> solveNQueens(int n)
     {
         vector<vector<string>> res;
+        vector<int> col_pos;
         if(n==1){
             res.push_back(vector<string>(1,"Q"));
             return res;
@@ -64,25 +64,14 @@ public:
         col_rec = vector<bool>(n, false);
         diag1_rec = vector<bool>(2*n-1, false);
         diag2_rec = vector<bool>(2*n-1, false);
-        for (int j = 0; j < n; j++){
-            vector<int> col_pos;
-            col_pos.push_back(j);
-            col_rec[j] = true;
-            diag1_rec[j] = true;
-            diag2_rec[n-1-j] = true;
-            putQueen(1, col_pos,res);
-            col_pos.pop_back();
-            col_rec[j] = false;
-            diag1_rec[j] = false;
-            diag2_rec[n-1-j] = false;
-        }
+        putQueen(0,col_pos,res);
         return res;
     }
 };
-int main(){
-    vector<vector<string>>res=Solution().solveNQueens(4);
-    cout<<"hello"<<endl;
-    return 0;
-}
+// int main(){
+//     vector<vector<string>>res=Solution().solveNQueens(4);
+//     cout<<"hello"<<endl;
+//     return 0;
+// }
 // @lc code=end
 

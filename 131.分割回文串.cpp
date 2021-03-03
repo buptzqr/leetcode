@@ -25,17 +25,32 @@ public:
         }
         return true;
     }
-    void dfs(vector<vector<string>>& res,vector<string> path, string& s,int begin){
-        if(begin==s.size()){
+    // void dfs(vector<vector<string>>& res,vector<string> path, string& s,int begin){
+    //     if(begin==s.size()){
+    //         res.push_back(path);
+    //         return;
+    //     }
+    //     for(int i=1;i+begin<=s.size();i++){
+    //         string str = string(s,begin,i);
+    //         if(isPalindrome(str)){
+    //             path.push_back(str);        
+    //             dfs(res,path,s,begin+i);
+    //             path.pop_back();
+    //         }
+    //     }
+    // }
+    void dfs(vector<vector<string>>&res,vector<string>&path,string& s,int idx){
+        if(idx == s.size()){
             res.push_back(path);
             return;
         }
-        for(int i=1;i+begin<=s.size();i++){
-            string str = string(s,begin,i);
-            if(isPalindrome(str)){
-                path.push_back(str);        
-                dfs(res,path,s,begin+i);
+        for(int i= idx;i<s.size();i++){
+            string candidate = string(s,idx,i-idx+1);
+            if(isPalindrome(candidate)){
+                path.push_back(candidate);
+                dfs(res,path,s,i+1);
                 path.pop_back();
+
             }
         }
     }

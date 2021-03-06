@@ -6,6 +6,7 @@
 
 // @lc code=start
 #include<vector>
+#include<algorithm>
 using namespace std;
 class Solution {
 public:
@@ -17,22 +18,38 @@ public:
     // 他与栈顶元素的差也肯定比他与当前元素的差小
     // 如果当前元素比栈顶元素大，直接入栈
     // 最后入栈一个哨兵0，是为了让栈里所有的元素都弹出去
+    // int maxProfit(vector<int>& prices) {
+    //     if(prices.size()<2)
+    //         return 0;
+    //     prices.push_back(0);
+    //     vector<int> s;
+    //     s.push_back(prices[0]);
+    //     int res=0;
+    //     for(int i=1;i<prices.size();i++){
+    //         while(!s.empty()&&prices[i]<s.back()){
+    //             res = max(res,s.back()-s.front());
+    //             s.pop_back();
+    //         }
+    //         s.push_back(prices[i]);
+    //     }
+    //     return res;
+    // }
+    // kedane算法，解决最大连续子序列问题,最大连续子序列不会有小于0的前缀
     int maxProfit(vector<int>& prices) {
         if(prices.size()<2)
             return 0;
-        prices.push_back(0);
-        vector<int> s;
-        s.push_back(prices[0]);
-        int res=0;
-        for(int i=1;i<prices.size();i++){
-            while(!s.empty()&&prices[i]<s.back()){
-                res = max(res,s.back()-s.front());
-                s.pop_back();
-            }
-            s.push_back(prices[i]);
+        int high_so_far =0;
+        int high_ending_here = 0; 
+        vector<int> sequence;
+        for(int i=1;i<prices.size();i++)
+            sequence.push_back(prices[i]-prices[i-1]);
+        for(auto e:sequence){
+            high_ending_here=high_ending_here+e>0?high_ending_here+e:0;
+            high_so_far = max(high_ending_here,high_so_far);
         }
-        return res;
-    }
+        return high_so_far;
+    } 
+    
 };
 // @lc code=end
 

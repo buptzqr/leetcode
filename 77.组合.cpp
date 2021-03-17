@@ -53,7 +53,7 @@ public:
         }
         //循环结束条件做了剪枝
         for(int i=start;i<=n-(k-rec.size())+1;i++){
-            vec.push_back(i);
+            rec.push_back(i);
             combine(n,k,i+1,rec);
             rec.pop_back();
         }

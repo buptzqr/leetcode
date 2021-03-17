@@ -10,6 +10,9 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int>& height) {
+        // 和84的区别是如果84遇到第一个比他小的元素，那么就不能继续向后
+        // 扩展了，但是我们却可以继续向后扩展找是否还有比当前元素大的元素
+        // 双指针搞定了
         int res = 0;
         int l = 0;
         int r = height.size()-1;

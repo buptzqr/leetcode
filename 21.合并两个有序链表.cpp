@@ -16,6 +16,7 @@
  * };
  */
 // 多个if并列一定要想清楚先后顺序，还有什么时候该用else了
+// 链表题一定不要忘记dummy_head
 class Solution
 {
 public:
